@@ -1,3 +1,4 @@
+﻿using Content.Server.GameObjects;
 using SS14.Shared.Interfaces.GameObjects;
 
 namespace Content.Server.Interfaces.GameObjects
@@ -7,7 +8,7 @@ namespace Content.Server.Interfaces.GameObjects
         /// <summary>
         ///     The inventory slot this item is stored in, if any.
         /// </summary>
-        IInventorySlot ContainingSlot { get; }
+        InventorySlot ContainingSlot { get; }
 
         /// <summary>
         ///     Called when the item is removed from its inventory slot.
@@ -17,6 +18,6 @@ namespace Content.Server.Interfaces.GameObjects
         /// <summary>
         ///     Called when the item is inserted into a new inventory slot.
         /// </summary>
-        void EquippedToSlot(IInventorySlot slot);
+        void EquippedToSlot(InventorySlot slot);
     }
 }

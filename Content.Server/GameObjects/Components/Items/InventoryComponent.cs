@@ -1,4 +1,4 @@
-using Content.Server.Interfaces.GameObjects;
+﻿using Content.Server.Interfaces.GameObjects;
 using SS14.Server.GameObjects;
 using SS14.Server.GameObjects.Components.Container;
 using SS14.Server.Interfaces.GameObjects;
@@ -11,7 +11,7 @@ using YamlDotNet.RepresentationModel;
 
 namespace Content.Server.GameObjects
 {
-    public class InventoryComponent : Component, IInventoryComponent
+    public class InventoryComponent : Component
     {
         public override string Name => "Inventory";
 
@@ -50,12 +50,22 @@ namespace Content.Server.GameObjects
             base.LoadParameters(mapping);
         }
 
+        /// <summary>
+        ///     Gets the item in the specified slot.
+        /// </summary>
+        /// <param name="slot">The slot to get the item for.</param>
+        /// <returns>Null if the slot is empty, otherwise the item.</returns>
         public IItemComponent Get(string slot)
         {
             return _GetSlot(slot).Item;
         }
 
-        public IInventorySlot GetSlot(string slot)
+        /// <summary>
+        ///     Gets the slot with specified name.
+        ///     This gets the slot, NOT the item contained therein.
+        /// </summary>
+        /// <param name="slot">The name of the slot to get.</param>
+        public InventorySlot GetSlot(string slot)
         {
             return slots[slot];
         }
@@ -66,6 +76,15 @@ namespace Content.Server.GameObjects
             return slots[slot];
         }
 
+        /// <summary>
+        ///     Puts an item in a slot.
+        /// </summary>
+        /// <remarks>
+        ///     This will fail if there is already an item in the specified slot.
+        /// </remarks>
+        /// <param name="slot">The slot to put the item in.</param>
+        /// <param name="item">The item to insert into the slot.</param>
+        /// <returns>True if the item was successfully inserted, false otherwise.</returns>
         public bool Insert(string slot, IItemComponent item)
         {
             if (item == null)
@@ -84,12 +103,23 @@ namespace Content.Server.GameObjects
             return true;
         }
 
+        /// <summary>
+        ///     Checks whether an item can be put in the specified slot.
+        /// </summary>
+        /// <param name="slot">The slot to check for.</param>
+        /// <param name="item">The item to check for.</param>
+        /// <returns>True if the item can be inserted into the specified slot.</returns>
         public bool CanInsert(string slot, IItemComponent item)
         {
             var inventorySlot = _GetSlot(slot);
             return inventorySlot.Item == null && container.CanInsert(item.Owner);
         }
 
+        /// <summary>
+        ///     Drops the item in a slot.
+        /// </summary>
+        /// <param name="slot">The slot to drop the item from.</param>
+        /// <returns>True if an item was dropped, false otherwise.</returns>
         public bool Drop(string slot)
         {
             if (!CanDrop(slot))
@@ -113,6 +143,13 @@ namespace Content.Server.GameObjects
             return true;
         }
 
+        /// <summary>
+        ///     Checks whether an item can be dropped from the specified slot.
+        /// </summary>
+        /// <param name="slot">The slot to check for.</param>
+        /// <returns>
+        ///     True if there is an item in the slot and it can be dropped, false otherwise.
+        /// </returns>
         public bool CanDrop(string slot)
         {
             var inventorySlot = _GetSlot(slot);
@@ -120,7 +157,14 @@ namespace Content.Server.GameObjects
             return item != null && container.CanRemove(item.Owner);
         }
 
-        public IInventorySlot AddSlot(string slot)
+        /// <summary>
+        ///     Adds a new slot to this inventory component.
+        /// </summary>
+        /// <param name="slot">The name of the slot to add.</param>
+        /// <exception cref="InvalidOperationException">
+        ///     Thrown if the slot with specified name already exists.
+        /// </exception>
+        public InventorySlot AddSlot(string slot)
         {
             if (HasSlot(slot))
             {
@@ -130,6 +174,13 @@ namespace Content.Server.GameObjects
             return slots[slot] = new InventorySlot(slot, this);
         }
 
+        /// <summary>
+        ///     Removes a slot from this inventory component.
+        /// </summary>
+        /// <remarks>
+        ///     If the slot contains an item, the item is dropped.
+        /// </remarks>
+        /// <param name="slot">The name of the slot to remove.</param>
         public void RemoveSlot(string slot)
         {
             if (!HasSlot(slot))
@@ -146,22 +197,38 @@ namespace Content.Server.GameObjects
             slots.Remove(slot);
         }
 
+        /// <summary>
+        ///     Checks whether a slot with the specified name exists.
+        /// </summary>
+        /// <param name="slot">The slot name to check.</param>
+        /// <returns>True if the slot exists, false otherwise.</returns>
         public bool HasSlot(string slot)
         {
             return slots.ContainsKey(slot);
         }
+    }
 
-        private class InventorySlot : IInventorySlot
+    public class InventorySlot
+    {
+        /// <summary>
+        /// The name of the slot.
+        /// </summary>
+        public string Name { get; }
+
+        /// <summary>
+        /// The item contained in the slot, can be null.
+        /// </summary>
+        public IItemComponent Item { get; set; }
+
+        /// <summary>
+        /// The component owning us.
+        /// </summary>
+        public InventoryComponent Owner { get; }
+
+        public InventorySlot(string name, InventoryComponent owner)
         {
-            public IItemComponent Item { get; set; }
-            public string Name { get; }
-            public IInventoryComponent Owner { get; }
-
-            public InventorySlot(string name, IInventoryComponent owner)
-            {
-                Name = name;
-                Owner = owner;
-            }
+            Name = name;
+            Owner = owner;
         }
     }
 }

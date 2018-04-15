@@ -11,7 +11,7 @@ namespace Content.Server.GameObjects
         public override string Name => "Item";
 
         /// <inheritdoc />
-        public IInventorySlot ContainingSlot { get; private set; }
+        public InventorySlot ContainingSlot { get; private set; }
 
         public void RemovedFromSlot()
         {
@@ -28,7 +28,7 @@ namespace Content.Server.GameObjects
             }
         }
 
-        public void EquippedToSlot(IInventorySlot slot)
+        public void EquippedToSlot(InventorySlot slot)
         {
             if (ContainingSlot != null)
             {

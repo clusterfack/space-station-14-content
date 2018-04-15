@@ -28,9 +28,9 @@ namespace Content.Server.GameObjects
             }
         }
 
-        private Dictionary<string, IInventorySlot> hands = new Dictionary<string, IInventorySlot>();
+        private Dictionary<string, InventorySlot> hands = new Dictionary<string, InventorySlot>();
         private List<string> orderedHands = new List<string>();
-        private IInventoryComponent inventory;
+        private InventoryComponent inventory;
         private IServerTransformComponent transform;
         private YamlMappingNode tempParametersMapping;
 
@@ -39,7 +39,7 @@ namespace Content.Server.GameObjects
 
         public override void Initialize()
         {
-            inventory = Owner.GetComponent<IInventoryComponent>();
+            inventory = Owner.GetComponent<InventoryComponent>();
             transform = Owner.GetComponent<IServerTransformComponent>();
             if (tempParametersMapping != null)
             {

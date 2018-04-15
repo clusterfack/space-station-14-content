@@ -74,6 +74,7 @@
     <Compile Include="GameObjects\Components\Interactable\Tools\WelderComponent.cs" />
     <Compile Include="GameObjects\Components\Interactable\Tools\WirecutterComponent.cs" />
     <Compile Include="GameObjects\Components\Interactable\Tools\WrenchComponent.cs" />
+    <Compile Include="GameObjects\Components\Items\Storage\StorageComponent.cs" />
     <Compile Include="GameObjects\Components\Power\PowerStorageComponent.cs" />
     <Compile Include="GameObjects\Components\Power\PowerGeneratorComponent.cs" />
     <Compile Include="GameObjects\Components\Power\PowerDevice.cs" />
@@ -89,7 +90,6 @@
     <Compile Include="GameObjects\EntitySystems\InteractionSystem.cs" />
     <Compile Include="GameObjects\EntitySystems\PowerSystem.cs" />
     <Compile Include="Interfaces\GameObjects\Components\Items\IHandsComponent.cs" />
-    <Compile Include="Interfaces\GameObjects\Components\Items\IInventoryComponent.cs" />
     <Compile Include="Interfaces\GameObjects\Components\Items\IItemComponent.cs" />
     <Compile Include="GameObjects\Components\Items\ServerHandsComponent.cs" />
     <Compile Include="GameObjects\Components\Items\InventoryComponent.cs" />
