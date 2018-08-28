@@ -1,4 +1,5 @@
 ﻿using Content.Client.GameObjects;
+using Content.Client.GameObjects.Components.Mining;
 using Content.Client.GameObjects.Components.Power;
 using Content.Client.GameObjects.Components.Storage;
 using Content.Client.Interfaces.GameObjects;
@@ -45,6 +46,8 @@ namespace Content.Client
             factory.Register<ClientStorageComponent>();
             factory.Register<ClientInventoryComponent>();
             factory.Register<PowerDebugTool>();
+
+            factory.Register<Mineturfs>();
         }
     }
 }

@@ -25,6 +25,7 @@ using Content.Server.GameObjects.Components.Weapon.Ranged.Hitscan;
 using Content.Server.GameObjects.Components.Weapon.Ranged.Projectile;
 using Content.Server.GameObjects.Components.Projectiles;
 using Content.Server.GameObjects.Components.Weapon.Melee;
+using Content.Server.GameObjects.Components.Mining;
 
 namespace Content.Server
 {
@@ -91,6 +92,9 @@ namespace Content.Server
 
             factory.Register<PowerDebugTool>();
             factory.Register<PoweredLightComponent>();
+
+            factory.Register<Mineturfs>();
+            factory.Register<MineturfSpawner>();
         }
 
         /// <inheritdoc />

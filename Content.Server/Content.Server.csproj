@@ -78,6 +78,8 @@
     <Compile Include="GameObjects\Components\Items\Storage\StoreableComponent.cs" />
     <Compile Include="GameObjects\Components\Items\Storage\ServerStorageComponent.cs" />
     <Compile Include="GameObjects\Components\Items\Storage\ItemComponent.cs" />
+    <Compile Include="GameObjects\Components\Mining\MineturfSpawner.cs" />
+    <Compile Include="GameObjects\Components\Mining\Mineturfs.cs" />
     <Compile Include="GameObjects\Components\Power\PowerStorageComponent.cs" />
     <Compile Include="GameObjects\Components\Power\PowerGeneratorComponent.cs" />
     <Compile Include="GameObjects\Components\Power\PowerDevice.cs" />
