@@ -1,0 +1,19 @@
+- type: entity
+  name: mineturfentity
+  id: mineturfentity
+  description: DWARFS IN SPACE
+  components:
+  - type: Transform
+  - type: Mineturfs
+  - type: BoundingBox
+
+- type: entity
+  name: mineturfspawner
+  id: mineturfspawner
+  description: NEW ROCKS
+  components:
+  - type: Transform
+  - type: MineturfSpawner
+  - type: BoundingBox
+  - type: Icon
+    texture: Tiles/asteroid2.png
